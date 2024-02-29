@@ -23,7 +23,7 @@ I trained the model with a batch size of 16 and an initial epoch value of 25 wit
 Below is the script used to run the model (provided in footfall_task.ipynb)
 
 ```python
-run(data='../data.yaml' , weights='yolov5s.pt', img=640, epochs=3, batch_size=16 , name=RES_DIR, optimizer = 'AdamW')
+run(data='../data.yaml' , weights='yolov5s.pt', img=640, epochs=175, batch_size=16 , name=RES_DIR, optimizer = 'AdamW')
 ```
 
 Below is the graph produced at the end of the 175 epochs
