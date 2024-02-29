@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['employee_tag']
+
+roboflow:
+  workspace: test1-pdnp9
+  project: footfalltest
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/test1-pdnp9/footfalltest/dataset/1
