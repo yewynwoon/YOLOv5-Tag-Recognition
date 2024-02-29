@@ -14,23 +14,26 @@ This repository contains code for training a YOLOv5 model to recognize employees
 
 ## Model Training
 
-1. **Installation**: Clone the YOLOv5 repository from https://github.com/ultralytics/yolov5 and install the required dependencies.
+For the model training, I used the pre-trained model of YOLOv5s, one of the main reasons for using this model particular model was its speed and its low complexity compared to other models such as the YOLOv5m which might struggle considering our small and limited dataset.
 
-2. **Data Formatting**: Organize your dataset in the YOLO format, which consists of a text file for each image or frame containing one row for each annotated object with class index and bounding box coordinates.
+I trained the model with a batch size of 16 and an initial epoch value of 25 with the default SGD optimiser. This resulted in poor precision and mAP50 values, however, I also noticed the losses were decreasing steadily. For the next couple of runs, I switched to 175 epochs and changed the optimiser to AdamW. These settings produced adequate results, with the precision going as high as 0.86 and the mAP50 at 0.89.
 
-3. **Training Configuration**: Configure the training parameters in the `train.py` script, including batch size, number of epochs, learning rate, and model architecture (e.g., YOLOv5s, YOLOv5m).
+Below is the script used to run the model (provided in footfall_task.ipynb)
 
-4. **Model Training**: Run the `train.py` script to start training the YOLOv5 model on your custom dataset. Monitor the training progress and evaluate the model's performance using validation metrics such as loss, precision, recall, and F1-score.
+```python
+run(data='../data.yaml' , weights='yolov5s.pt', img=640, epochs=3, batch_size=16 , name=RES_DIR, optimizer = 'AdamW')
+```
 
-5. **Model Evaluation**: Evaluate the trained model on a separate test set to assess its performance on unseen data. Calculate evaluation metrics such as precision, recall, and F1-score to measure the model's accuracy.
+Below is the graph produced at the end of the 175 epochs
+![alt text](https://github.com/yewynwoon/footfall_task/blob/master/results.png)
+
+As seen above, the loss rates steadily decreased with every epoch and the precision,recall and mAP values increased tremoundously. The cls_loss value stays at zero due to there only being one class.
 
 ## Inference
+For inference, I used a script I wrote called label_script.py which copies all the frames in the validation folder that contains a tag due to the sparse number of frames containing any tags at all, it made it hard to test inference. 
 
-1. **Model Deployment**: Deploy the trained model for inference on new images or videos containing employees with the special tag. Use the `detect.py` script to perform inference and visualize the model's predictions.
+![alt text](https://github.com/yewynwoon/footfall_task/blob/master/example_image_inference.jpg)
 
-2. **Integration**: Integrate the model into your application or workflow to automate the process of recognizing employees with the special tag in real-time or batch processing scenarios.
+As seen above, the model is able to detect the tag at a 0.6 confidence.
 
-## Conclusion
-
-This codebase provides a framework for training a YOLOv5 model to recognize employees with a special tag in images or videos. By following the steps outlined in this README, you can customize and deploy the model for your specific use case and achieve accurate detection results.
 
