@@ -4,6 +4,8 @@
 
 This repository contains code for training a YOLOv5 model to recognize employees with a special tag in images or videos. The model is trained on a custom dataset containing images or frames from videos where employees with the special tag are annotated.
 
+Please follow the instructions shown in footfall_task.ipynb to run the model
+
 ## Dataset Preparation
 
 1. **Gathering Data and Annotation**: For data gathering, I used CVAT.ai (https://www.cvat.ai/) to annotate every frame in the 57 second video provided where the employee's tag is visible while making sure not to annotate any frames where the tag's pattern is not clearly visible. Every frame where the tag is visible is annotated with a bounding box around the tag itself only to ensure the model learns to recognise the pattern of the tag rather than the person wearing the tag to avoid bias towards this specific video.
@@ -42,8 +44,11 @@ Although, sometimes the model would detect small white parts in the frames as th
 
 I also tested the model on the initial video sample.mp4, where it was able to detect the employee moving around with no issues. With the use of the detect.py file in YOLOv5 I was also able to output the object detection data to a txt file that I saved in inference_{inference iteration}/labels where the class, x coordinates, y coordinates, width, height and confidence are given as shown below.
 
-![alt text](https://github.com/yewynwoon/footfall_task/blob/master/inference_output.jpg)
+![alt text](https://github.com/yewynwoon/footfall_task/blob/master/inference_output.png)
 
 Through this txt file, I was able to output the frame number and the xy coordinates after calculating the absolute pixels with a function to produce a dictionary with the following output:
 
-![alt text](https://github.com/yewynwoon/footfall_task/blob/master/frame_number.jpg)
+![alt text](https://github.com/yewynwoon/footfall_task/blob/master/frame_number.png)
+
+## Conclusion
+Overall, the model produced decent results considering the dataset given. However, some changes I would make if I had more time would be to train a model for recogninsing employees and then train another model as a tag recogniser to properly identify a person based on their tag.
