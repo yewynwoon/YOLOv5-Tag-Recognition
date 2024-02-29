@@ -36,4 +36,14 @@ For inference, I used a script I wrote called label_script.py which copies all t
 
 As seen above, the model is able to detect the tag at a 0.6 confidence.
 
+![alt text](https://github.com/yewynwoon/footfall_task/blob/master/example_double_tag.jpg)
 
+Although, sometimes the model would detect small white parts in the frames as the tag due to the poor picture quality.
+
+I also tested the model on the initial video sample.mp4, where it was able to detect the employee moving around with no issues. With the use of the detect.py file in YOLOv5 I was also able to output the object detection data to a txt file that I saved in inference_{inference iteration}/labels where the class, x coordinates, y coordinates, width, height and confidence are given as shown below.
+
+![alt text](https://github.com/yewynwoon/footfall_task/blob/master/inference_output.jpg)
+
+Through this txt file, I was able to output the frame number and the xy coordinates after calculating the absolute pixels with a function to produce a dictionary with the following output:
+
+![alt text](https://github.com/yewynwoon/footfall_task/blob/master/frame_number.jpg)
